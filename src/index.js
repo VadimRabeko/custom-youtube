@@ -1,4 +1,5 @@
 import { API_KEY, MAX_RESULTS, INPUT, SUBMIT_BUTTON, FORM } from '/src/variables.js';
+import createVideoList from './components/createVideoList.js';
 
 async function getData(inputValue) {
     const response = await fetch(
@@ -21,12 +22,12 @@ function showList(data) {}
 function onSubmit(event) {
     event.preventDefault();
     const inputValue = INPUT.value;
-    console.log(
-        getData(inputValue).then((data) => {
-            showVideo(data);
-            showList(data);
-        })
-    );
+
+    getData(inputValue).then((data) => {
+        showVideo(data);
+        showList(data);
+        createVideoList(data);
+    });
 }
 
 SUBMIT_BUTTON.addEventListener('click', onSubmit);
