@@ -7,3 +7,5 @@ function setVideoPlayerId(event) {
 }
 
 export default setVideoPlayerId;
+
+// поменять на конкретное значение

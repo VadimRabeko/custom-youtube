@@ -1,31 +1,18 @@
-import { API_KEY, MAX_RESULTS, INPUT, SUBMIT_BUTTON, FORM } from '/src/variables.js';
+import { INPUT, SUBMIT_BUTTON, FORM } from '../src/variables.js';
+import request from './request.js';
 import videoList from './components/videoList.js';
-import videoPlayer from './components/videoPlayer.js';
+import VideoPlayer from './components/videoPlayer.js';
 
-async function getData(inputValue) {
-    const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&type=video&q=${inputValue}&maxResults=${MAX_RESULTS}`
-    );
-    const data = await response.json();
-    return data;
-}
-
-function showVideo(iframe) {
-    FORM.append(iframe);
-}
-
-function showList(ul) {
-    FORM.append(ul);
-}
-
-function onSubmit(event) {
+function formOnSubmit(event) {
     event.preventDefault();
     const inputValue = INPUT.value;
 
-    getData(inputValue).then((data) => {
-        showVideo(videoPlayer(data));
-        showList(videoList(data));
-    });
+    request(inputValue)
+        .catch((error) => console.log(error)) // обработчик ошибки
+        .then((data) => {
+            FORM.append(new VideoPlayer(data).createVideoPlayerElement(560, 320));
+            FORM.append(videoList(data));
+        });
 }
 
-SUBMIT_BUTTON.addEventListener('click', onSubmit);
+SUBMIT_BUTTON.addEventListener('click', formOnSubmit);
