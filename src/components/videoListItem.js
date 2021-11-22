@@ -8,7 +8,8 @@ class VideoListItem {
     createVideoListItemElement() {
         const listItemElement = document.createElement('li');
         listItemElement.classList.add('video_list-item');
-        listItemElement.innerHTML = `${this.title}`;
+        listItemElement.dataset.videoId = this.id;
+        listItemElement.innerHTML = `<img src="${this.logoUrl}" alt="${this.title}"><p>${this.title}</p>`;
         return listItemElement;
     }
 }

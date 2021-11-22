@@ -1,11 +1,10 @@
 import VideoListItem from './videoListItem.js';
+import setVideoPlayerId from '../utils.js';
 
-function createVideoList(data) {
+function videoList(data) {
     const videoListItemArray = data.items.map(
         (item) => new VideoListItem(item.snippet.title, item.snippet.thumbnails.default.url, item.id.videoId)
     );
-
-    console.log(videoListItemArray);
 
     const videoListItemCreateArray = videoListItemArray.map((item) => item.createVideoListItemElement());
 
@@ -14,9 +13,8 @@ function createVideoList(data) {
     videoListItemCreateArray.forEach((element) => {
         videoList.append(element);
     });
-
-    console.log(videoList);
+    videoList.addEventListener('click', setVideoPlayerId);
     return videoList;
 }
 
-export default createVideoList;
+export default videoList;
