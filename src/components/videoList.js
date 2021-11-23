@@ -9,8 +9,9 @@ function videoList(data) {
     const videoListItemCreateArray = videoListItemArray.map((item) => item.createVideoListItemElement());
 
     const videoList = document.createElement('ul');
-    videoList.classList.add('list-group-flush');
+    videoList.classList.add('list-group-flush', 'overflow-auto');
     videoList.style.width = '20%';
+    videoList.style.height = '80vh';
     videoListItemCreateArray.forEach((element) => {
         videoList.append(element);
     });
