@@ -9,7 +9,8 @@ function videoList(data) {
     const videoListItemCreateArray = videoListItemArray.map((item) => item.createVideoListItemElement());
 
     const videoList = document.createElement('ul');
-    videoList.classList.add('video_list');
+    videoList.classList.add('list-group-flush');
+    videoList.style.width = '20%';
     videoListItemCreateArray.forEach((element) => {
         videoList.append(element);
     });

@@ -10,8 +10,8 @@ function formOnSubmit(event) {
     request(inputValue)
         .catch((error) => console.log(error)) // обработчик ошибки
         .then((data) => {
-            FORM.append(new VideoPlayer(data).createVideoPlayerElement(560, 320));
-            FORM.append(videoList(data));
+            FORM.after(videoList(data));
+            FORM.after(new VideoPlayer(data).createVideoPlayerElement(560, 320));
         });
 }
 

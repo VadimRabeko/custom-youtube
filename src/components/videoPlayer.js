@@ -5,6 +5,9 @@ class VideoPlayer {
     }
 
     createVideoPlayerElement(width, height) {
+        const videoPlayerContainer = document.createElement('div');
+        videoPlayerContainer.classList.add('container', 'd-flex', 'justify-content-center', 'p-5');
+        videoPlayerContainer.style.width = '80%';
         const videoPlayer = document.createElement('iframe');
         videoPlayer.setAttribute('width', `${width}`);
         videoPlayer.setAttribute('height', `${height}`);
@@ -16,7 +19,8 @@ class VideoPlayer {
             'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
         );
         videoPlayer.setAttribute('allowfullscreen', '');
-        return videoPlayer;
+        videoPlayerContainer.append(videoPlayer);
+        return videoPlayerContainer;
     }
 }
 
