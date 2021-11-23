@@ -6,6 +6,10 @@ function setVideoPlayerId(event) {
     iframe.setAttribute('src', `https://www.youtube.com/embed/${li.dataset.videoId}`);
 }
 
-export default setVideoPlayerId;
+function clearInputValue(inputElement) {
+    inputElement.value = '';
+}
+
+export { setVideoPlayerId, clearInputValue };
 
 // поменять на конкретное значение

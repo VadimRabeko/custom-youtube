@@ -1,5 +1,5 @@
 import VideoListItem from './videoListItem.js';
-import setVideoPlayerId from '../utils.js';
+import { setVideoPlayerId } from '../utils.js';
 
 function videoList(data) {
     const videoListItemArray = data.items.map(
