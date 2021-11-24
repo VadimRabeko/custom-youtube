@@ -22,11 +22,8 @@ class VideoPlayer {
         );
         videoPlayer.setAttribute('allowfullscreen', '');
 
-        const videoPlayerTitle = document.createElement('h3');
-        videoPlayerTitle.innerText = this.title;
-
         videoPlayerContainer.append(videoPlayer);
-        videoPlayerContainer.append(videoPlayerTitle);
+
         return videoPlayerContainer;
     }
 }

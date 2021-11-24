@@ -12,4 +12,16 @@ async function request(inputValue) {
     }
 }
 
-export default request;
+async function nextPageRequest(lastInputValue, nextPageToken) {
+    try {
+        const response = await fetch(
+            `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&type=video&q=${lastInputValue}&maxResults=${MAX_RESULTS}&pageToken=${nextPageToken}`
+        );
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export { request, nextPageRequest };

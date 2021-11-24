@@ -1,6 +1,6 @@
 import { INPUT, SUBMIT_BUTTON, FORM } from '../src/variables.js';
-import { clearInputValue } from './utils.js';
-import request from './request.js';
+import { setLastInputValue, clearInputValue } from './utils.js';
+import { request } from './request.js';
 import videoList from './components/videoList.js';
 import VideoPlayer from './components/videoPlayer.js';
 
@@ -9,7 +9,7 @@ function formOnSubmit(event) {
     const inputValue = INPUT.value;
 
     request(inputValue)
-        .finally(clearInputValue(INPUT))
+        .finally(setLastInputValue(inputValue), clearInputValue(INPUT))
         .catch((error) => console.log(error)) // обработчик ошибки
         .then((data) => {
             FORM.after(videoList(data));

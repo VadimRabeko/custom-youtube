@@ -1,5 +1,5 @@
 import VideoListItem from './videoListItem.js';
-import { setVideoPlayerId } from '../utils.js';
+import { setVideoPlayerId, listOnScroll } from '../utils.js';
 
 function videoList(data) {
     const videoListItemArray = data.items.map(
@@ -10,12 +10,14 @@ function videoList(data) {
 
     const videoList = document.createElement('ul');
     videoList.classList.add('list-group-flush', 'overflow-auto');
+    videoList.dataset.nextPageToken = data.nextPageToken;
     videoList.style.width = '20%';
-    videoList.style.height = '80vh';
+    videoList.style.height = '600px';
     videoListItemCreateArray.forEach((element) => {
         videoList.append(element);
     });
     videoList.addEventListener('click', setVideoPlayerId);
+    videoList.addEventListener('scroll', listOnScroll(videoList.dataset.nextPageToken));
     return videoList;
 }
 
