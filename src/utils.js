@@ -1,5 +1,5 @@
-import { FORM } from './variables.js';
-import { nextPageRequest } from './request.js';
+import { FORM, MAX_RESULTS } from './variables.js';
+import request from './request.js';
 import VideoListItem from './components/videoListItem.js';
 
 function setVideoPlayerId(event) {
@@ -9,6 +9,8 @@ function setVideoPlayerId(event) {
     const iframe = document.querySelector('iframe');
     iframe.setAttribute('src', `https://www.youtube.com/embed/${li.dataset.videoId}`);
 }
+
+// поменять на конкретное значение
 
 function setLastInputValue(inputValue) {
     FORM.dataset.lastInputValue = inputValue;
@@ -23,19 +25,24 @@ function clearInputValue(inputElement) {
 }
 
 function getNextPageTokenData(nextPageToken) {
-    return nextPageRequest(getLastInputValue(), nextPageToken);
+    return request(getLastInputValue(), nextPageToken);
 }
 
 function updateVideoList(data) {
     const videoListItemArray = data.items.map(
         (item) => new VideoListItem(item.snippet.title, item.snippet.thumbnails.default.url, item.id.videoId)
     );
-
     const videoListItemCreateArray = videoListItemArray.map((item) => item.createVideoListItemElement());
     const videoList = document.querySelector('ul');
+
     videoListItemCreateArray.forEach((element) => {
         videoList.append(element);
     });
+}
+
+function getVideoListNextPageToken() {
+    const videoList = document.querySelector('ul');
+    return videoList.dataset.nextPageToken;
 }
 
 function updateVideoListNextPageToken(nextPageToken) {
@@ -43,17 +50,24 @@ function updateVideoListNextPageToken(nextPageToken) {
     videoList.dataset.nextPageToken = nextPageToken;
 }
 
-function listOnScroll(nextPageToken) {
-    return function (event) {
-        const listHeight = event.target.clientHeight;
-        if (event.target.scrollTop > listHeight / 2) {
-            getNextPageTokenData(nextPageToken)
-                .then((data) => updateVideoList(data))
-                .finally(updateVideoListNextPageToken(nextPageToken));
+function updateVideoListDataMaxResults(list) {
+    list.dataset.maxResults = +list.dataset.maxResults + MAX_RESULTS;
+}
+
+function listOnScroll(event) {
+    console.log(+event.target.dataset.maxResults);
+    console.log(event.target.children.length);
+    if (event.target.scrollTop + event.target.clientHeight >= event.target.scrollHeight - 200) {
+        if (+event.target.dataset.maxResults === event.target.children.length) {
+            updateVideoListDataMaxResults(event.target);
+            getNextPageTokenData(getVideoListNextPageToken())
+                .then((data) => {
+                    updateVideoList(data);
+                    updateVideoListNextPageToken(data.nextPageToken);
+                })
+                .catch((error) => console.log(error));
         }
-    };
+    }
 }
 
 export { setVideoPlayerId, setLastInputValue, clearInputValue, listOnScroll };
-
-// поменять на конкретное значение

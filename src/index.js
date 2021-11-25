@@ -1,6 +1,6 @@
 import { INPUT, SUBMIT_BUTTON, FORM } from '../src/variables.js';
 import { setLastInputValue, clearInputValue } from './utils.js';
-import { request } from './request.js';
+import request from './request.js';
 import videoList from './components/videoList.js';
 import VideoPlayer from './components/videoPlayer.js';
 
