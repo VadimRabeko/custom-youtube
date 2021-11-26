@@ -10,8 +10,6 @@ function setVideoPlayerId(event) {
     iframe.setAttribute('src', `https://www.youtube.com/embed/${li.dataset.videoId}`);
 }
 
-// поменять на конкретное значение
-
 function setLastInputValue(inputValue) {
     FORM.dataset.lastInputValue = inputValue;
 }
@@ -70,4 +68,14 @@ function listOnScroll(event) {
     }
 }
 
-export { setVideoPlayerId, setLastInputValue, clearInputValue, listOnScroll };
+function removeVideoPlayer() {
+    const videoPlayer = document.querySelector('iframe');
+    videoPlayer.remove();
+}
+
+function removeVideoList() {
+    const videoList = document.querySelector('ul');
+    videoList.remove();
+}
+
+export { setVideoPlayerId, setLastInputValue, clearInputValue, listOnScroll, removeVideoPlayer, removeVideoList };
