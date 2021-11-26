@@ -1,6 +1,7 @@
 import VideoListItem from './videoListItem.js';
 import { MAX_RESULTS } from '../variables.js';
-import { setVideoPlayerId, listOnScroll } from '../utils.js';
+import { setVideoPlayerId } from '../utils.js';
+import { listOnScroll } from './infinityScroll.js';
 
 function videoList(data) {
     const videoListItemArray = data.items.map(
