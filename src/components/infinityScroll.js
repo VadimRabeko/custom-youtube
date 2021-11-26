@@ -37,7 +37,10 @@ function updateVideoListNextPageToken(nextPageToken) {
 }
 
 function listOnScroll(event) {
-    if (event.target.scrollTop + event.target.clientHeight >= event.target.scrollHeight - 200) {
+    if (
+        event.target.scrollTop + event.target.clientHeight >=
+        event.target.scrollHeight - (event.target.scrollHeight / 100) * 20
+    ) {
         if (+event.target.dataset.maxResults === event.target.children.length) {
             updateVideoListDataMaxResults(event.target);
             getNextPageTokenData(getVideoListNextPageToken())
