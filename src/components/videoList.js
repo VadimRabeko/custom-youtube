@@ -11,7 +11,7 @@ function videoList(data) {
     const videoListItemCreateArray = videoListItemArray.map((item) => item.createVideoListItemElement());
 
     const videoList = document.createElement('ul');
-    videoList.classList.add('list-group-flush', 'overflow-auto');
+    videoList.classList.add('v-list', 'list-group-flush', 'overflow-auto');
     videoList.dataset.nextPageToken = data.nextPageToken;
     videoList.dataset.maxResults = MAX_RESULTS;
     videoList.style.width = '20%';

@@ -13,10 +13,10 @@ function formOnSubmit(event) {
     const inputValue = INPUT.value;
     request(inputValue)
         .finally(setLastInputValue(inputValue), clearInputValue(INPUT))
-        .catch((error) => console.log(error)) // обработчик ошибки
+        .catch((error) => console.log(error))
         .then((data) => {
             FORM.after(videoList(data));
-            FORM.after(new VideoPlayer(data).createVideoPlayerElement(560, 320));
+            FORM.after(new VideoPlayer(data).createVideoPlayerElement(520, 360));
         });
 }
 

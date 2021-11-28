@@ -1,0 +1,16 @@
+@media (max-width: 768px) {
+    iframe {
+        width: 416px;
+        height: 256px;
+    }
+}
+
+@media (max-width: 576px) {
+    .cu-container {
+        flex-direction: column;
+    }
+
+    ul {
+        width: 100% !important;
+    }
+}

@@ -6,7 +6,7 @@ class VideoPlayer {
 
     createVideoPlayerElement(width, height) {
         const videoPlayerContainer = document.createElement('div');
-        videoPlayerContainer.classList.add('container', 'd-flex', 'flex-column', 'text-center', 'p-5');
+        videoPlayerContainer.classList.add('vp-container', 'container', 'd-flex', 'justify-content-center', 'pt-5');
         videoPlayerContainer.style.width = '80%';
 
         const videoPlayer = document.createElement('iframe');
